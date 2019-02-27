@@ -1,0 +1,64 @@
+
+@extends('layout.app')
+@section('content')
+
+<form  method="post"  action="{{route('Menus.store')}}" enctype="multipart/form-data">
+    <div class="container">
+        <h1>菜品列表</h1><br/>
+     @include('layout._error')
+
+       菜品名称：<input type="text" name="goods_name" class="form-control" value="{{old('goods_name')}}" >
+    </div><br/>
+    <div class="container">
+        菜品评分:   <input type="text" id="disabledTextInput" class="form-control" name="rating" value="{{old('rating')}}">
+    </div><br/>
+
+
+<div class="container">
+     所属分类： <select class="form-control" name="category_id">
+        @foreach($shops as $shop)
+        <option value="{{$shop->id}}">{{$shop->name}}</option>
+@endforeach
+    </select>
+    </div>
+
+    <div class="container">
+        菜品价格:   <input type="text" id="disabledTextInput" class="form-control" name="goods_price" value="{{old('goods_price')}}">
+    </div><br/>
+    <div class="container">
+
+        菜品描述：<textarea  rows="3"  class="form-control" name="description">{{old('description')}}</textarea>
+    </div><br/>
+
+    <div class="container">
+        月销量:   <input type="text" id="disabledTextInput" class="form-control" name="month_sales" value="{{old('month_sales')}}">
+    </div><br/>
+
+    <div class="container">
+        评分数量:   <input type="text" id="disabledTextInput" class="form-control" name="rating_count" value="{{old('rating_count')}}">
+    </div><br/>
+    <div class="container">
+       提示信息:   <input type="text" id="disabledTextInput" class="form-control" name="tips" value="{{old('tips')}}">
+    </div><br/>
+    <div class="container">
+        满意程度数量:   <input type="text" id="disabledTextInput" class="form-control" name="satisfy_count" value="{{old('satisfy_count')}}">
+    </div><br/>
+    <div class="container">
+        满意程度评分:   <input type="text" id="disabledTextInput" class="form-control" name="satisfy_rate" value="{{old('satisfy_rate')}}">
+    </div><br/> <div class="container">
+        菜品图片:   <input type="file" id="disabledTextInput" class="form-control" name="goods_img" value="{{old('goods_img')}}">
+    </div><br/>
+    <div class="container">
+      菜品状态：
+        <input type="radio" id="inlineCheckbox2" value="1" name="status"> 上架
+        <input type="radio" id="inlineCheckbox1" value="0" name="status"> 下架
+    </div><br/>
+    {{csrf_field()}}
+
+
+
+    <button type="submit" class="btn-primary" style="margin-left:700px;width: 100px;height: 40px">提交</button><br/>
+
+</form>
+
+   @stop

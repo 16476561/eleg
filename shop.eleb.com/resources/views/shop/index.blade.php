@@ -35,6 +35,7 @@
                     {{ method_field('delete') }}
                     <button type="submit" class="btn btn-danger">删除</button>
                 </form>
+
             </td>
             {{--<td>--}}
                 {{--<form style="display: inline" method="get" action="{{ route('shops.change',[$shop]) }}">--}}

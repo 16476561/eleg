@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Model\Shop;
+use App\Model\User;
 use Illuminate\Auth\Events\Login;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -34,10 +36,14 @@ class LoginController extends Controller
         ]);
         if(Auth::attempt([
             'name'=>$request->name,
-            'password'=>$request->name,
+            'password'=>$request->password,
+            'status'=>1,//禁用账号先设定状态，1为正常，当为0就禁用
         ],$request->has('remember'))){
-            return redirect()->route('shops.index','登陆成功');
+            return redirect()->intended(route('shops.index','登陆成功'));
         }else{
+            //禁用账号
+            $user=User::where('name',$request->name)->first();
+            if($user && $user->status==0) return back()->with('danger','账号被禁用');
             return back()->with('danger','账号密码不正确');
         }
 
@@ -46,7 +52,13 @@ class LoginController extends Controller
         Auth::logout();
         return redirect()->route('login')->with('success','退出成功');
     }
-       
+
+    //接受上传图片
+    public function upload(Request $request){
+        $img=$request->file('file');
+        $path=Storage::url($img->store('public/shop'));
+        return ['path'=>$path];
+    }
 
 
 

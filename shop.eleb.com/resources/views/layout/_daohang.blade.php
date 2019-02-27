@@ -17,12 +17,12 @@
             <ul class="nav navbar-nav">
                 <ul class="nav navbar-nav navbar-right">
                     <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> <span class="caret"></span></a>
-                        {{--<ul class="dropdown-menu">--}}
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">菜品分类 <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
 
-                            {{--<li><a href="{{route('shopcategorys.index')}}">商家分类列表</a></li>--}}
-                            {{--<li><a href="{{route('shopcategorys.create')}}">商家添加分类</a></li>--}}
-                        {{--</ul>--}}
+                            <li><a href="{{route('MenuCategorys.index')}}">菜品分类列表</a></li>
+                            <li><a href="{{route('MenuCategorys.create')}}">添加菜品分类</a></li>
+                        </ul>
                     </li>
                 </ul>
 
@@ -36,25 +36,25 @@
                     </li>
                 </ul>
 
-                {{--<ul class="nav navbar-nav navbar-right">--}}
-                    {{--<li class="dropdown">--}}
-                        {{--<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="caret"></span></a>--}}
-                        {{--<ul class="dropdown-menu">--}}
-                            {{--<li><a href="{{route('admins.index')}}">管理员列表</a></li>--}}
-                            {{--<li><a href="{{route('admins.create')}}">添加管理员</a></li>--}}
-                        {{--</ul>--}}
-                    {{--</li>--}}
-                {{--</ul>--}}
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">菜品列表<span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="{{route('Menus.index')}}">菜品列表</a></li>
+                            <li><a href="{{route('Menus.create')}}">添加菜品</a></li>
+                        </ul>
+                    </li>
+                </ul>
 
-                {{--<ul class="nav navbar-nav navbar-right">--}}
-                    {{--<li class="dropdown">--}}
-                        {{--<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="caret"></span></a>--}}
-                        {{--<ul class="dropdown-menu">--}}
-                            {{--<li><a href="">商品列表</a></li>--}}
-                            {{--<li><a href="">添加商品</a></li>--}}
-                        {{--</ul>--}}
-                    {{--</li>--}}
-                {{--</ul>--}}
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">活动列表<span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="{{route('Activitys.index')}}">活动列表</a></li>
+
+                        </ul>
+                    </li>
+                </ul>
 
 
                 {{--<ul class="nav navbar-nav navbar-right">--}}
@@ -79,12 +79,25 @@
 
 
             </ul>
-            <form class="navbar-form navbar-left" method="get" name="keyword" action="">
+            <form class="navbar-form navbar-left" method="get" action="{{route('Menus.index')}}" name="keyword">
                 <div class="form-group">
-                    <input type="text" class="form-control" placeholder="Search" name="keyword">
+                    <input type="text" class="form-control" placeholder="请输入关键字 " name="keyword">
                 </div>
-                <button type="submit" class="btn btn-default" >Submit</button>
+                <p></p>
+                <div class="form-group">
+                    <label class="sr-only" for="exampleInputEmail3">Email address</label>
+                    <input type="text" class="form-control" id="exampleInputEmail3" placeholder="请输入价格" name="goods_price1">
+                </div>>
+                <font style="font-size: 24px;background-color: white">到</font>
+                <div class="form-group">
+                    <label class="sr-only" for="exampleInputPassword3">Password</label>
+                    <input type="text" class="form-control" id="exampleInputPassword3" placeholder="请输入价格" name="goods_price2">
+                </div>
+                <button type="submit" class="btn btn-default" >搜索</button>
+
             </form>
+
+
             <ul class="nav navbar-nav navbar-right">
                 @guest
                 <li><a href="{{route('login')}}">登陆</a></li>
@@ -94,7 +107,7 @@
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-user">{{auth()->user()->name}}</span> <span class="caret"></span></a>
                     <ul class="dropdown-menu">
                         <li><a href="#">个人中心</a></li>
-                        <li><a href="{{route('changes.password',[auth()->user()->id])}}">修改密码</a></li>
+                        <li><a href="{{route('changes.password')}}">修改密码</a></li>
                         <li><a href="{{route('logout')}}">退出登陆</a></li>
 
                     </ul>

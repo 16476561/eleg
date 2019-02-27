@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Model\ShopCategory;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
 
 class ShopCategoryController extends Controller
 {
@@ -15,7 +16,7 @@ class ShopCategoryController extends Controller
     }
     //
     public function index(){
-        $shopcategorys=ShopCategory::all();
+        $shopcategorys=ShopCategory::orderby('id','Asc')->paginate(2);
         //var_dump($shopcategorys);exit;
         return view('shopcategory.index',['shopcategorys'=>$shopcategorys]);
     }
@@ -26,30 +27,24 @@ class ShopCategoryController extends Controller
             $this->validate($request,
                 [
                     'name'=>'required',
-                    'img'=>'image',
+                    'img'=>'required',
                     'status'=>'required',
                     'captcha'=>'required|captcha',
                 ],[
                     //错误提示
                     'name.required'=>'名称不能为空',
-                    'img.image'=>'图片格式错误',
+                    'img.required'=>'图片不能为空',
                     'status.required'=>'状态不能为空',
                     'captcha.required'=>'请填写验证码',
                     'captcha.captcha'=>'验证码不正确',
                 ]);
             //获取图片上传地址
-        $img=$request->file('img');
-            //保存图片地址并判断是否有图片
-        if($img){
-            $path=$img->store('public/images');
-        }else{
-            $path='';
-        }
+        $img=$request->img;
         ShopCategory::create([
             'name'=>$request->name,
             'status'=>$request->status,
             'view_times'=>0,
-            'img'=>$path,
+            'img'=>$img,
         ]);
         $request->session()->flash('success','添加成功');
         return redirect()->route('shopcategorys.index');
@@ -65,24 +60,21 @@ class ShopCategoryController extends Controller
                 [
                     'name'=>'required',
                     'status'=>'required',
-                    'img'=>'image',
+                    'img'=>'required',
                 ],[
                     'name.required'=>'名称不能为空',
                     'status.required'=>'状态没选',
-                    'img.img'=>'图片格式错误',
+                    'img.required'=>'图片必填',
                 ]);
-                $img=$request->file('img');
-                if($img){
-                    $path=$img->store('public/images');
-                }else{
-                    $path=$shopcategory->img;
-                }
+
+            //图片地址
+                $img=$request->img;
 
                 $shopcategory->update([
                    'name'=>$request->name,
                    'status'=>$request->status,
                     'view_times'=>0,
-                    'img'=>$path,
+                    'img'=>$img,
                 ]);
 
           $request->session()->flash('success','修改成功');
@@ -90,9 +82,21 @@ class ShopCategoryController extends Controller
         }
 
         public function destroy(ShopCategory $shopcategory){
+
             $shopcategory->delete();
             session()->flash('success','删除成功');
             return redirect()->route('shopcategorys.index');
         }
+
+            //接受上传图片
+    public function upload(Request $request){
+        $img=$request->file('file');
+        $path=Storage::url($img->store('public/shop'));
+        return ['path'=>$path];
+    }
+
+
+
+
 
 }

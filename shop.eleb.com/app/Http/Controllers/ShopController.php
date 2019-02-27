@@ -24,6 +24,7 @@ class ShopController extends Controller
 
         $id=auth()->user()->shop_id;
         $shop=shop::get()->where('id',$id)->first();
+
         $shopcategorys=DB::select('select * from shop_categories');
         //var_dump($shopcategorys);exit;
         return view('shop.index',['shop'=>$shop,'shopcategorys'=>$shopcategorys]);
@@ -240,6 +241,16 @@ class ShopController extends Controller
 
         return view('shop.show',['shop'=>$shop]);
     }
+
+    //接受上传图片
+    public function upload(Request $request){
+        $img=$request->file('file');
+        $path=Storage::url($img->store('public/shop'));
+        return ['path'=>$path];
+    }
+
+
+
 
 }
 

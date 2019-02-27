@@ -17,7 +17,7 @@
         </div><br/>
         <div class="container">
             修改商品图片:   <input type="file" id="disabledTextInput" class="form-control" name="img">
-            <img width="50px" src="{{\Illuminate\Support\Facades\Storage::url($shopcategory->img)}}">
+            <img width="50px" src="{{$shopcategory->img??''}}">
         </div><br/>
     {{csrf_field()}}
     {{method_field('patch')}}

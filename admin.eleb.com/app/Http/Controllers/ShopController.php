@@ -68,12 +68,17 @@ class ShopController extends Controller
             ]);
                 $img=$request->file('shop_img');
 
-               if($img){
-                   $path=url(Storage::url($img->store('public/shop')));
+                if($img){
+                    $path=url(Storage::url($img->store('public/shop')));
                 }else{
                     $path='';
                 }
+               // dd($path);
+//                $data = $request->input();
+//                $data["shop_img"]= $path;
+
             shop::create([
+                //$data
                'shop_category_id'=>$request->shop_category_id,
                 'shop_name'=>$request->shop_name,
                 'shop_img'=>$path,
@@ -90,8 +95,8 @@ class ShopController extends Controller
                 'discount'=>$request->discount,
                 'status'=>$request->status,
                 'view_times'=>0,
-                'img'=>Storage::url($path),
-            ]);
+                //'img'=>Storage::url($path),
+    ]);
                 $request->session()->flash('success','添加成功');
                 return redirect()->route('shops.index');
 
@@ -184,6 +189,7 @@ class ShopController extends Controller
                         session()->flash('success','删除成功');
                         return redirect()->route('shops.index');
                     }
+
                             //状态启动
                    public function change(Shop $shop){
                                 //var_dump($shop);exit;
@@ -202,6 +208,7 @@ class ShopController extends Controller
 
 
                     public function show(Shop $shop){
+                //echo '1111';exit;
                            // $shops=shop::all();
                             //ar_dump($shops);exit;
                         return view('shop.show',['shop'=>$shop]);

@@ -17,10 +17,12 @@ class LoginController extends Controller
     }
 
 
-    //
+    //登陆页面
     public function create(){
         return view('login.create');
     }
+
+    //登陆
     public function store(Request $request){
         $this->validate($request,[
             'name'=>'required',
@@ -34,13 +36,15 @@ class LoginController extends Controller
         ]);
             if(Auth::attempt([
                 'name'=>$request->name,
-                'password'=>$request->name,
+                'password'=>$request->password,
             ],$request->has('remember'))){
                 return redirect()->route('shops.index','登陆成功');
             }else{
                 return back()->with('danger','账号密码不正确');
             }
 
+
+                    //退出登陆
             }
     public function destroy(){
         Auth::logout();

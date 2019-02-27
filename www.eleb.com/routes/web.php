@@ -14,3 +14,8 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/business_list','Api\ApiController@business_list');
+Route::get('/appoint','Api\ApiController@appoint');
+
+

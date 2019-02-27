@@ -26,7 +26,7 @@
         <tr>
 
             <td>{{$shop->shop_name}}</td>
-            <td><img width="50px" src="{{\Illuminate\Support\Facades\Storage::url($shop->shop_img)}}"></td>
+            <td><img width="50px" src="{{$shop->shop_img??''}}"></td>
             <td>{{$shop->shopsss->name}}</td>
             <td>@if($shop->status==1)正常
                 @elseif($shop->status)禁用

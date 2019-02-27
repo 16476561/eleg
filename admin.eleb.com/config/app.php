@@ -164,6 +164,11 @@ return [
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
 
+        Jacobcyl\AliOSS\AliOssServiceProvider::class,
+
+        //编辑器
+        Overtrue\LaravelUEditor\UEditorServiceProvider::class,
+
         /*
          * Package Service Providers...
          */

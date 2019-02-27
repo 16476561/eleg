@@ -29,11 +29,25 @@ Route::resource('shops', 'ShopController');
 Route::get('shops/{shop}/change','ShopController@change')->name('shops.change');
 Route::get('shops/{shop}/off','ShopController@off')->name('shops.off');
 //管理员列表
+
+//修改旧密码确认新密码
+Route::get('admins/password','AdminController@password')->name('admins.password');
+Route::post('admins/password1','AdminController@password1')->name('admins.password1');
+//管理员资源路由
 Route::resource('admins', 'AdminController');
-Route::get('admins/password/{admin}','AdminController@password')->name('admins.password');
-Route::post('admins/password1/{admin}','AdminController@password1')->name('admins.password1');
 //登陆
 Route::get('login', 'LoginController@create')->name('login');
 Route::post('login', 'LoginController@store')->name('login');
 Route::get('logout', 'LoginController@destroy')->name('logout');
-//修改旧密码确认新密码
+//商户管理
+Route::get('users', 'UserController@index')->name('users.index');
+Route::get('users/{user}/start','UserController@start')->name('users.start');
+Route::get('users/{user}/guan','UserController@guan')->name('users.guan');
+////重置密码
+ Route::get('users/{user}/reset','UserController@reset')->name('users.reset');
+Route::post('users/{user}/broker','UserController@broker')->name('users.broker');
+//活动资源路由
+Route::resource('Activitys','ActivityController');
+//文件上传
+Route::post('/upload','ShopCategoryController@upload')->name('upload');
+
