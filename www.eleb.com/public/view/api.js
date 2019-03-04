@@ -1,36 +1,36 @@
 window.api = {
   // 登录验证接口
-  loginCheck: '/loginCheck.php',
+  loginCheck: '/api/login',
   // 获取短信验证码接口
-  sms: '/sms.php',
-  // 注册接口
-  regist: '/regist.php',
+  sms: '/sms',
+  // 账号注册接口
+  regist: '/reg',
   // 修改密码接口
-  changePassword: '/changePassword.php',
+  changePassword: '/cps',
   // 忘记密码接口
-  forgetPassword: '/forgetPassword.php',
+  forgetPassword: '/reset',
   // 地址列表接口
-  addressList: '/addressList.php',
+  addressList: '/address_show',
   // 指定地址接口
-  address: '/address.php',
+  address: '/address_edit',
   // 保存新增地址接口
-  addAddress: '/addAddress.php',
+  addAddress: '/address',
   // 保存修改地址接口
-  editAddress: '/editAddress.php',
+  editAddress: '/address_update',
   // 获得订单列表接口
-  orderList: '/orderList.php',
+  orderList: '/list',
   // 获得指定订单接口
-  order: '/order.php',
+  order: '/order',
   // 获得商家列表接口
   businessList: '/business_list',
   // 获得指定商家接口
   business: '/appoint',
   // 保存购物车接口
-  addCart: '/addCart.php',
+  addCart: '/addCart',
   // 获取购物车数据接口
-  cart: '/cart.php',
+  cart: '/cart',
   // 添加订单接口
-  addOrder: '/addorder.php',
+  addOrder: '/addOrder',
   // 支付接口
   pay: '/pay.php'
 };

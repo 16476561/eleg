@@ -64,7 +64,7 @@ class AdminController extends Controller
     }
 
 
-    //修改旧密码和确认新密码
+
 
         public function password(){
         return view('admin.password');

@@ -21,7 +21,7 @@ class MenuCategoryController extends Controller
     }
 
     public function index(){
-        //登陆里面的ID等于创建的ID
+        //登陆里面的ID等于创建的ID。直显示自己登陆看见页面
         $id=auth()->user()->shop_id;
        $shows=MenuCategory::get()->where('shop_id',$id);
 

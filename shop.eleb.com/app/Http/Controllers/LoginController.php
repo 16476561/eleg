@@ -7,6 +7,7 @@ use App\Model\User;
 use Illuminate\Auth\Events\Login;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 
 class LoginController extends Controller
@@ -56,7 +57,7 @@ class LoginController extends Controller
     //接受上传图片
     public function upload(Request $request){
         $img=$request->file('file');
-        $path=Storage::url($img->store('public/shop'));
+        $path=url(Storage::url($img->store('public/shop')));
         return ['path'=>$path];
     }
 

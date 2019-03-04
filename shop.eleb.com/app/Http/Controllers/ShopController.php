@@ -21,7 +21,7 @@ class ShopController extends Controller
     }
 
     public function index(){
-
+        //登陆只能看见自己的商铺
         $id=auth()->user()->shop_id;
         $shop=shop::get()->where('id',$id)->first();
 

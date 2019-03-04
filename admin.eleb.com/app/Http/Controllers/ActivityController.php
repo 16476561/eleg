@@ -23,9 +23,10 @@ class ActivityController extends Controller
         if($serch==3) $wheres[]=['end_time','<',$aa];
 
        if($serch){
+           //判断。如果搜索那个进行时段就显示。并且传值
            $Activitys=Activity::where($wheres)->get();
-           //var_dump($Activitys);exit;
        }else{
+           //如果没搜索就显示总的活动
            $Activitys=Activity::all();
        }
         return view('Activity.index',['Activitys'=>$Activitys,'serch'=>$serch]);
@@ -65,6 +66,7 @@ class ActivityController extends Controller
             public  function edit(Activity $Activity){
          $endtime=$Activity->end_time;
          $star_time=$Activity->star_time;
+         //把其中的T替换
          $end=str_replace(' ','T',$endtime);
          $star=str_replace(' ','T',$star_time);
 

@@ -33,6 +33,7 @@ class UserController extends Controller
     }
     //重置密码方法
     protected function broker(Request $request,User $user){
+        //查看一条数据
           $user1=user::find($user->id);
           $user1->password=Hash::make($request->password);
           $user1->save();

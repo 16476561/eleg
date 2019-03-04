@@ -2,19 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Model\Activity;
-use App\Model\User;
 use Illuminate\Http\Request;
 
-class ActivityController extends Controller
+class MemberController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware('auth'
-
-        );
-    }
-
     /**
      * Display a listing of the resource.
      *
@@ -22,10 +13,7 @@ class ActivityController extends Controller
      */
     public function index()
     {
-        //活动页面显示，已结束的活动不显示到页面上
-      $date=date('Y-m-d H:i:s');
-      $Acticitys=Activity::where('end_time','>',$date)->get();
-        return view('Activity.index',['Activitys'=>$Acticitys]);
+        //
     }
 
     /**
@@ -47,7 +35,6 @@ class ActivityController extends Controller
     public function store(Request $request)
     {
         //
-
     }
 
     /**
@@ -56,11 +43,9 @@ class ActivityController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Activity $Activity)
+    public function show($id)
     {
         //
-
-       return view('Activity.show',['Activity'=>$Activity]);
     }
 
     /**

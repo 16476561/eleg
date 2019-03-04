@@ -618,6 +618,18 @@ div.some_bar svg[data-v-28eb0cae] {
 div.some_bar span[data-v-28eb0cae] {
   margin-left: .2rem;
 }
+button[data-v-28eb0cae] {
+  margin: .6rem auto;
+  display: block;
+  width: 9rem;
+  height: 1rem;
+  font-size: .5rem;
+  background: #4cd964;
+  border: none;
+  outline: none;
+  color: #fff;
+  border-radius: .1rem;
+}
 
 .business_box {
   width: 100%;
@@ -1638,4 +1650,4 @@ button[data-v-5f630473] {
   font-size: .4rem;
 }
 
-/*# sourceMappingURL=app.ffbcac84660b34850734337a2953c0ed.css.map*/
+/*# sourceMappingURL=app.b2211f713128ed194bc35384c5974109.css.map*/
