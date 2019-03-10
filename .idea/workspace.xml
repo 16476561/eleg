@@ -88,8 +88,8 @@
       <file leaf-file-name="ActivityController.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/shop.eleb.com/app/Http/Controllers/ActivityController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="600">
-              <caret line="22" column="27" lean-forward="true" selection-start-line="22" selection-start-column="27" selection-end-line="22" selection-end-column="27" />
+            <state relative-caret-position="390">
+              <caret line="15" column="5" lean-forward="true" selection-start-line="15" selection-start-column="5" selection-end-line="15" selection-end-column="5" />
             </state>
           </provider>
         </entry>
@@ -276,24 +276,26 @@
             <path>
               <item name="eleg" type="b2602c69:ProjectViewProjectNode" />
               <item name="eleg" type="462c0819:PsiDirectoryNode" />
-              <item name="shop.eleb.com" type="462c0819:PsiDirectoryNode" />
+              <item name="admin.eleb.com" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="eleg" type="b2602c69:ProjectViewProjectNode" />
               <item name="eleg" type="462c0819:PsiDirectoryNode" />
-              <item name="shop.eleb.com" type="462c0819:PsiDirectoryNode" />
+              <item name="admin.eleb.com" type="462c0819:PsiDirectoryNode" />
               <item name="app" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="eleg" type="b2602c69:ProjectViewProjectNode" />
               <item name="eleg" type="462c0819:PsiDirectoryNode" />
-              <item name="www.eleb.com" type="462c0819:PsiDirectoryNode" />
+              <item name="admin.eleb.com" type="462c0819:PsiDirectoryNode" />
+              <item name="resources" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="eleg" type="b2602c69:ProjectViewProjectNode" />
               <item name="eleg" type="462c0819:PsiDirectoryNode" />
-              <item name="www.eleb.com" type="462c0819:PsiDirectoryNode" />
-              <item name="database" type="462c0819:PsiDirectoryNode" />
+              <item name="admin.eleb.com" type="462c0819:PsiDirectoryNode" />
+              <item name="resources" type="462c0819:PsiDirectoryNode" />
+              <item name="views" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -404,12 +406,12 @@
       <workItem from="1552179199285" duration="2497000" />
       <workItem from="1552185242969" duration="6346000" />
       <workItem from="1552200686704" duration="968000" />
-      <workItem from="1552205301048" duration="4161000" />
+      <workItem from="1552205301048" duration="5400000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="261930000" />
+    <option name="totallyTimeSpent" value="263169000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -422,7 +424,6 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.4980695" visible="true" weight="0.27479893" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.32956153" />
@@ -797,8 +798,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/shop.eleb.com/app/Http/Controllers/ActivityController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="600">
-          <caret line="22" column="27" lean-forward="true" selection-start-line="22" selection-start-column="27" selection-end-line="22" selection-end-column="27" />
+        <state relative-caret-position="390">
+          <caret line="15" column="5" lean-forward="true" selection-start-line="15" selection-start-column="5" selection-end-line="15" selection-end-column="5" />
         </state>
       </provider>
     </entry>
