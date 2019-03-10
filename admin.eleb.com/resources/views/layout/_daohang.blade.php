@@ -142,7 +142,7 @@
                 {{--</li>--}}
             {{--</ul>--}}
             <?php
-            $navs =\App\Model\Nav::all();
+           $navs=\App\Model\Nav::all();
             $parents=\App\Model\Nav::where('pid',0)->get();
             ?>
 

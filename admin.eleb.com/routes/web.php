@@ -77,3 +77,5 @@ Route::resource('eventprizes', 'EventPrizeController');
 Route::get('et/kj/{id}','EventController@kj')->name('et.kj');
 //查看开奖
 Route::get('et/md/{id}','EventController@md')->name('et.md');
+//
+Route::resource('register', 'Controller');
