@@ -121,10 +121,10 @@ class MenusController extends Controller
     }
 
         public function edit(Menus $Menu){
-
             $a=auth()->user()->shop_id;
             $shops=MenuCategory::all()->where('shop_id',$a)->all();
         return view('Menus.edit',compact('Menu'),compact('shops'));
+
         }
 
         public function update(Request $request,Menus $Menu){
@@ -185,7 +185,7 @@ class MenusController extends Controller
                 'satisfy_count'=>$request->satisfy_count,
                 'satisfy_rate'=>$request->satisfy_rate,
                 'goods_img'=>$path,
-                'shop_id'=>auth()->user()->shop_id,
+                'shop_id'=>auth()->user()->id,
                 'category_id'=>$request->category_id,
                 'status'=>$request->status,
                 'view_times'=>0,

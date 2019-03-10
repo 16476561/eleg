@@ -14,6 +14,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Qcloud\Sms\SmsSingleSender;
 
 class AddCartController extends Controller
 {               //添加购物车
@@ -69,90 +70,126 @@ class AddCartController extends Controller
     //添加订单列表
     public function addOrder(Request $request)
     {
-        //查看购物车里面的User_id 等于 登陆ID
-
-        $cart = Cart::where('user_id', auth()->user()->id)->get();
+        //得到地址ID
+        $addres = Address::find($request->address_id);
+        //得到购物车的ID
+        $cart = Cart::where('user_id', auth()->user()->id)->first();
         //dd($cart);
-        //查看收获地址
-        $addresss = Address::where('id', '=', $request->address_id)->get()->first();
-        //查看商品ID
-       // dd($addresss);
-        $goods_id = $cart[0]['goods_id'];
-        $menus = Menus::where('goods_id', '=', $goods_id)->get();
-        //商家ID=商品的ID
-        $shop_id = $menus[0]['shop_id'];
-        //设置金额
-        $total = 0;
-        foreach ($cart as $aa) {
-            //查看商品的ID
-            $date = Menus::where('goods_id', $aa->goods_id)->get()->first();
-            //定义一个价格等于商品的里面的价格
-            $aa['goods_price'] = $date->goods_price;
-
-            $create = [
-                'user_id' =>auth()->user()->id,
-                'shop_id' => $date->shop_id,
-                'sn' => uniqid(),
-                'province' => $addresss->provence,
-                'city' => $addresss->city,
-                'county' => $addresss->area,
-                'address' => $addresss->detail_address,
-                'tel' => $addresss->tel,
-                'name' => $addresss->name,
-                'total' => $total += $aa->amount * $aa->goods_price,
-                'status' => 1,
-                'out_trade_no' => uniqid(),
-            ];
+        //得到商品的ID
+        $shop = Menus::where('goods_id', $cart->goods_id)->get()->first();
+        //购物车和商品链表查询，里面的值相等
+        $goods_list = DB::table('carts')->leftjoin('menuses', 'carts.goods_id', '=', 'menuses.goods_id')
+            ->select('carts.goods_id', 'menuses.goods_name', 'menuses.goods_img', 'carts.amount', 'menuses.goods_price')
+            ->where('carts.user_id', auth()->user()->id)
+            ->get();
+        $money = 0;
+        //遍历
+        foreach ($goods_list as $goods) {
+            $money += $goods->goods_price * $goods->amount;
         }
+        $data = [
+            'user_id' => auth()->user()->id,
+            'shop_id' => $shop->shop_id,
+            'sn' => uniqid(),
+            'province' => $addres->provence,
+            'city' => $addres->city,
+            'area' => $addres->area,
+            'county' => 0,
+            'address' => $addres->detail_address,
+            'tel' => $addres->tel,
+            'name' => $addres->name,
+            'total' => $money,
+            'status' => 0,
+            'out_trade_no' => uniqid(),
+
+        ];
+
+        //dd($data);
         //开启事务
         DB::beginTransaction();
-            try {
-                $order = Order::create($create);
-                foreach ($cart as $goods) {
-                        $goods['goods_name'] = $date->goods_name;
-                        $goods['goods_img'] = $date->goods_img;
 
-                        $create1 = [
-                        'order_id' => $order->id,
-                        'goods_id' => $goods->goods_id,
-                        'amount' => $goods->amount,
-                        'goods_name' => $goods->goods_name,
-                        'goods_img' => $goods->goods_img,
-                        'goods_price' => $goods->goods_price,
-                    ];
-                    OrderDetail::create($create1);
-                    DB::table('carts')->where('user_id', Auth::user()->id)->delete();
-                }
-                //执行事务
-                DB::commit();
-                return ['status' => 'true', 'message' => '添加成功', 'order_id' => $order->id];
-            } catch (\Exception $e){
-                //回滚
-                DB::rollBack();
-                return ['status' => 'false', 'message' => '添加失败'];
+            $order = Order::create($data);
+            foreach ($goods_list as $goods) {
+                        $data1 = [
+                    'order_id' => $order->id,
+                    'goods_id' => $goods->goods_id,
+                    'amount' => $goods->amount,
+                    'goods_name' => $goods->goods_name,
+                    'goods_img' => $goods->goods_img,
+                    'goods_price' => $goods->goods_price,
+                ];
+                OrderDetail::create($data1);
+                DB::table('carts')->where('user_id', Auth::user()->id)->delete();
             }
 
-}
+        if ($data && $data1) {
+            DB::commit();
+            $redis = new \Redis();
+            $redis->connect('127.0.0.1');
+            $sms = mt_rand(1000, 9999);
+            //设置验证码过期时间
+            $redis->set($order->tel, $sms, 100);
+            // 短信应用SDK AppID
+            $appid = 1400189773; // 1400开头
+
+            // 短信应用SDK AppKey
+            $appkey = "c501c4a6e9c714fb74b318115f9065bc";
+
+            // 需要发送短信的手机号码
+            $phoneNumbers =18280313220;
+            //var_dump($phoneNumbers);exit;
+            // 短信模板ID，需要在短信应用中申请
+            $templateId = 285161;  // NOTE: 这里的模板ID`7839`只是一个示例，真实的模板ID需要在短信控制台中申请
+
+            $smsSign = "吴磊的美好的一天"; // NOTE: 这里的签名只是示例，请使用真实的已申请的签名，签名参数使用的是`签名内容`，而不是`签名ID`
+
+            try {
+                $ssender = new SmsSingleSender($appid, $appkey);
+                $params = [$sms, 5];
+                $result = $ssender->sendWithParam("86", $phoneNumbers, $templateId,
+                    $params, $smsSign, "", "");  // 签名参数未提供或者为空时，会使用默认签名发送短信
+                $rsp = json_decode($result);
+
+            } catch (\Exception $e) {
+                echo var_dump($e);
+            }
+            return ['status' => 'true', 'message' => '添加成功', 'order_id' => $order->id];
+        } else {
+            DB::rollBack();
+            return ['status' => 'false', 'message' => '添加失败'];
+        }
+    }
+
+
+
+
+
                 //获取订单列表接口
     public  function order(Request $request){
         //定义一个空数组
         $data=[];
         //读取order数据表
-        $order=Order::where('id',$request->id)->first();
+       $order_id=Order::where('id','=',$request->id)->get()->first();
+      //dd($order_id);
         //把其中的显示地址等于order中的地址
-        $data['order_address']=$order->province.$order->city.$order->county.$order->address;
+        $data['order_address']=$order_id->province.$order_id->city.$order_id->county.$order_id->address;
         //查看商家列表
-        $shops=Shop::find($order->shop_id);
+       // dd($data);
+        $shops=Shop::find($order_id->shop_id);
+           //dd($shops);
         //查看订单商品表
-        $orderDeta=OrderDetail::where('order_id',$order->id)->get();
+        //return $shops;
+        $orderDeta=OrderDetail::where('order_id',$order_id->id)->get();
+       // dd($orderDeta);
         //把data中的[]数据自定义=订单表中的数据
-        $data['order_code']=$order->sn;
-        $data['order_birth_time']=$order->created_at->toArray()['formatted'];
+        $data['order_code']=$order_id->sn;
+        //(string)显示时间的时候加上才能显示页面
+        $data['order_birth_time']=(string)$order_id->created_at;
         $data['shop_id']=$shops->shop_id;
         $data['shop_name']=$shops->shop_name;
         $data['shop_img']=$shops->shop_img;
         //判断订单表是否支付
-        switch ($order['order_status']){
+        switch ($order_id['order_status']){
             case -1:
                 $order['order_status'] = '已取消';
                 break;
@@ -184,24 +221,14 @@ class AddCartController extends Controller
     }
 
                 //获取订单显示页面接口
-    public function list(){
-        $data = [];
-        //获取订单信息
-        $orders = Order::select('id','sn as order_code','created_at as order_birth_time','status as order_status','shop_id','total as order_price','province','city','county','address')
-            ->where('user_id',Auth::user()->id)
-            ->get()
-            ->toArray();
-       // return $orders;
-        //获取订单商品信息
+    public function list()
+    {
+            //商品的ID等于登陆的ID
+        $orders = Order::where('user_id',auth()->user()->id)->get();
+//        return $orders;
+
         foreach ($orders as $order){
-            //获取详细地址
-            //return $order;
-            $order['order_address'] = $order['province'].$order['city'].$order['county'].$order['address'];
-            //删除多余的数据
-            //return $order['order_address'];
-            //unset($order['province'],$order['city'],$order['county'],$order['address']);
-            //替换订单状态
-            switch ($order['order_status']){
+            switch ($order['order_status']) {
                 case -1:
                     $order['order_status'] = '已取消';
                     break;
@@ -218,19 +245,107 @@ class AddCartController extends Controller
                     $order['order_status'] = '完成';
                     break;
             }
-            //查询商品详细信息
-            $order['goods_list'] =OrderDetail::select('goods_id','goods_name','goods_img','amount','goods_price')->where('order_id',$order['id'])->get()->toArray();
-            //查询商家信息
+            $detail = OrderDetail::where('order_id',$order->id)->get();
+            $order['goods_list'] =$detail;
+            $goods = Menus::where('goods_id',$detail[0]->goods_id)->first();
+            $shop = Shop::where('id',$goods->shop_id)->first();
+            $order['shop_name'] = $shop->shop_name;
+            $order['shop_img'] = $shop->shop_img;
+            $order['order_address']=$order->provence.$order->city.$order->area.$order->detail_address;
+        }
+        return $orders;
 
-            $shops = Shop::select('shop_name','shop_img')->find($order['shop_id'])->toArray();
 
-            //将订单信息与商家信息合并
-            $data[] = array_merge($order,$shops);
+//        $data = [];
+//        //获取订单信息
+//        $orders = Order::select('id', 'sn as order_code', 'created_at as order_birth_time', 'status as order_status', 'shop_id', 'total as order_price', 'province', 'city', 'county', 'address')
+//            ->where('user_id', 17)
+//            ->get()
+//            ->toArray();
+//
+//        //获取订单商品信息
+//        foreach ($orders as $order) {
+//            //获取详细地址
+//            $order['order_address'] = $order['province'] . $order['city'] . $order['county'] . $order['address'];
+//           //dd($order);
+//            //删除多余的数据
+//            //return $order['order_address'];
+//           // unset($order['province'],$order['city'],$order['county'],$order['address']);
+//            //替换订单状态
+//            switch ($order['order_status']) {
+//                case -1:
+//                    $order['order_status'] = '已取消';
+//                    break;
+//                case 0:
+//                    $order['order_status'] = '待支付';
+//                    break;
+//                case 1:
+//                    $order['order_status'] = '待发货';
+//                    break;
+//                case 2:
+//                    $order['order_status'] = '待确认';
+//                    break;
+//                case 3:
+//                    $order['order_status'] = '完成';
+//                    break;
+//            }
+//            //查询商品详细信息
+//            $order['goods_list'] = OrderDetail::select('goods_id', 'goods_name', 'goods_img', 'amount', 'goods_price')->where('order_id','=', $order['id'])->get()->toArray();
+//          //dd($order['shop_id']);
+//            //查询商家信息
+//                $shops = Shop::select('shop_name','shop_img')->find($order['shop_id'])->toArray();
+//
+//
+//
+//        // dd($shops);
+//            //将订单信息与商家信息合并
+//            $data[] = array_merge( $shops,$order);
+//            return $data;
+//
+//        }     //  return $data;
+
+
+
+    }
+
+            //短信验证
+    public function  sms(Request $request){
+
+        //开启redis
+        $redis=new \Redis();
+        $redis->connect('127.0.0.1');
+        $sms=mt_rand(1000,9999);
+        //设置验证码过期时间
+        $redis->set($request->tel,$sms,100);
+        // 短信应用SDK AppID
+        $appid = 1400189773; // 1400开头
+
+// 短信应用SDK AppKey
+        $appkey = "c501c4a6e9c714fb74b318115f9065bc";
+
+// 需要发送短信的手机号码
+        $phoneNumbers =$request->tel;
+        //var_dump($phoneNumbers);exit;
+// 短信模板ID，需要在短信应用中申请
+        $templateId = 285161;  // NOTE: 这里的模板ID`7839`只是一个示例，真实的模板ID需要在短信控制台中申请
+
+        $smsSign = "吴磊的美好的一天"; // NOTE: 这里的签名只是示例，请使用真实的已申请的签名，签名参数使用的是`签名内容`，而不是`签名ID`
+
+        try {
+            $ssender = new SmsSingleSender($appid, $appkey);
+            $params = [$sms,5];
+            $result = $ssender->sendWithParam("86", $phoneNumbers, $templateId,
+                $params, $smsSign, "", "");  // 签名参数未提供或者为空时，会使用默认签名发送短信
+            $rsp = json_decode($result);
 
         }
-        //返回数据
-        return $data;
-
+        catch(\Exception $e) {
+            echo var_dump($e);
+        }
+        return[
+            "status"=> "true",
+            "message"=> "获取短信验证码成功"
+        ] ;
     }
 
 }

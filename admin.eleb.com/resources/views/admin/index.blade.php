@@ -15,7 +15,7 @@
             <td>{{$admin->email}}</td>
 
             <td>
-                {{--<a href="{{route('admins.edit',[$admin])}}" class="btn btn-info">编辑</a>--}}
+                <a href="{{route('admins.edit',[$admin])}}" class="btn btn-info">编辑</a>
                 <form style="display: inline" method="post" action="{{ route('admins.destroy',[$admin]) }}">
                     {{ csrf_field() }}
                     {{ method_field('delete') }}

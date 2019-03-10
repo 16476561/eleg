@@ -7,7 +7,7 @@ use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
-
+use Spatie\Permission\Models\Role;
 class AdminController extends Controller
 {
 //中间件
@@ -25,11 +25,13 @@ class AdminController extends Controller
 
     public function create()
     {
-        return view('admin.create');
+        $roles=Role::all();
+        return view('admin.create',['roles'=>$roles]);
     }
 
     public function store(Request $request)
     {
+
         $this->validate($request,
             [
                 'name' => 'required|unique:admins,name',
@@ -42,16 +44,46 @@ class AdminController extends Controller
                 'email.unique' => '邮箱已存在',
                 'password.required' => '密码必填',
             ]);
-        admin::create([
+        $user=admin::create([
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
             'remember_token' => 0,
         ]);
+        $user->syncRoles($request->role);
         $request->session()->flash('success', '添加成功');
         return redirect()->route('admins.index');
 
     }
+        public function edit(Admin $admin){
+        $roles=Role::all();
+        return view('admin.edit',['admin'=>$admin,'roles'=>$roles]);
+        }
+
+        public function update(Admin $admin,Request $request){
+            $this->validate($request,
+                [
+                    'name' => 'required',
+                    'email' => 'required|unique:admins,email',
+                    'password' => 'required'
+                ], [
+                    'name.required' => '账号必填',
+                    'email.required' => '邮箱必填',
+                    'email.unique' => '邮箱已存在',
+                    'password.required' => '密码必填',
+                ]);
+            $admin->update([
+                'name' => $request->name,
+                'email' => $request->email,
+                'password' => Hash::make($request->password),
+                'remember_token' => 0,
+            ]);
+
+            $admin->syncRoles($request->role);
+            $request->session()->flash('success', '修改成功');
+            return redirect()->route('admins.index');
+
+        }
 
 
     public function destroy(Admin $admin)

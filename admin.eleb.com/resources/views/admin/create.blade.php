@@ -16,8 +16,13 @@
     <div class="container">
         管理员邮件:   <input type="text" id="disabledTextInput" class="form-control" name="email">
     </div><br/>
+    <div class="container"> 角色选择：
+        @foreach($roles as $role)
+            <input type="checkbox" id="inlineCheckbox1" name="role[]" value="{{$role->name}}">{{$role->name}}
+        @endforeach
+    </div>
     {{csrf_field()}}
     <button type="submit" class="btn-primary" style="margin-left:700px">提交</button>
 </form>
-</table>
+
    @stop

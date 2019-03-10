@@ -51,3 +51,29 @@ Route::resource('Activitys','ActivityController');
 //文件上传
 Route::post('/upload','ShopCategoryController@upload')->name('upload');
 
+//会员列表
+Route::group(['middleware' => ['role:会员管理员']], function () {
+Route::get('Members','MemberController@index')->name('Members.index');
+//查看会员订单
+Route::get('Members/{member}','MemberController@show')->name('Members.show');
+});
+
+//启动，禁用
+Route::get('Members/{member}/success','MemberController@success')->name('Members.success');
+Route::get('Members/{member}/cancel','MemberController@cancel')->name('Members.cancel');
+Route::group(['middleware' => ['role:角色管理员|权限管理员|导航管理员']], function () {
+//角色管理
+    Route::resource('roles', 'RoleController');
+//权限管理
+    Route::resource('permissions', 'PermissionController');
+//导航管理
+    Route::resource('navs', 'NavController');
+});
+//抽奖活动
+Route::resource('events', 'EventController');
+//活动奖品
+Route::resource('eventprizes', 'EventPrizeController');
+//开奖
+Route::get('et/kj/{id}','EventController@kj')->name('et.kj');
+//查看开奖
+Route::get('et/md/{id}','EventController@md')->name('et.md');

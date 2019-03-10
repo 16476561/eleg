@@ -57,25 +57,28 @@
                 </ul>
 
 
-                {{--<ul class="nav navbar-nav navbar-right">--}}
-                    {{--<li class="dropdown">--}}
-                        {{--<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="caret"></span></a>--}}
-                        {{--<ul class="dropdown-menu">--}}
-                            {{--<li><a href="">会员列表</a></li>--}}
-                            {{--<li><a href="">添加会员</a></li>--}}
-                        {{--</ul>--}}
-                    {{--</li>--}}
-                {{--</ul>--}}
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">订单管理<span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="{{route('Orders.index')}}">订单列表</a></li>
+                            <li><a href="{{route('Statistics.index')}}">订单一周统计</a></li>
+                            <li><a href="{{route('Statistics.sale')}}">订单菜品一周统计</a></li>
+                            <li><a href="{{route('Statistics.show')}}">订单三个月个月统计</a></li>
+                            <li><a href="">订单菜品三个月统计</a></li>
+                        </ul>
+                    </li>
+                </ul>
 
-                {{--<ul class="nav navbar-nav navbar-right">--}}
-                    {{--<li class="dropdown">--}}
-                        {{--<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">商家用户<span class="caret"></span></a>--}}
-                        {{--<ul class="dropdown-menu">--}}
-                            {{--<li><a href="">用户列表</a></li>--}}
-                            {{--<li><a href="">添加用户</a></li>--}}
-                        {{--</ul>--}}
-                    {{--</li>--}}
-                {{--</ul>--}}
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">活动抽奖<span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="{{route('events.index')}}">报名列表</a></li>
+                            <li><a href=""></a></li>
+                        </ul>
+                    </li>
+                </ul>
 
 
             </ul>

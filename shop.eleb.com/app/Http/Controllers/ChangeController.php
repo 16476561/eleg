@@ -9,6 +9,10 @@ use Illuminate\Support\Facades\Hash;
 class ChangeController extends Controller
 {
     //
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     public function password(){
         return view('change.password');
     }

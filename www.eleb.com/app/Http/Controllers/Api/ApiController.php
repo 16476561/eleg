@@ -83,7 +83,8 @@ class ApiController extends Controller
                 'username' => $request->username,
                 'password' => Hash::make($request->password),
                 'tel' => $request->tel,
-                'rememberToken' => ''
+                'rememberToken' => '',
+                'status'=>1,
             ]);
             return ["status" => "true",
                      "message" => "注册成功"
@@ -102,6 +103,7 @@ class ApiController extends Controller
         if (Auth::attempt([
             'username' => $request->name,
             'password' => $request->password,
+            'status'=>1,
         ], $request->has('remember'))){
       return [
             "status"=>"true",
@@ -110,11 +112,13 @@ class ApiController extends Controller
             "username"=>auth()->user()->username,
       ];
     } else {
-        return[
-                "status"=>"false",
-                "message"=>"登录失败,账号密码不对",
-            ];
+            //禁用账号
+            $members=Member::where('username',$request->username)->first();
+            if($members && $members->status==0);
         }
+        return ['status'=>'false',
+                'message'=>'账号密码错误或已被禁用'
+        ];
     }
             //短信验证
         public function  sms(Request $request){

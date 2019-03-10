@@ -27,7 +27,7 @@
 
             <td>{{$shop->shop_name}}</td>
             <td><img width="50px" src="{{$shop->shop_img??''}}"></td>
-            <td>{{$shop->shopsss->name}}</td>
+            <td>{{$shop->shopsss?$shop->shopsss->name:'不在了'}}</td>
             <td>@if($shop->status==1)正常
                 @elseif($shop->status)禁用
                 @else($shop->status)未审核
