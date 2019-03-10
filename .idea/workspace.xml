@@ -20,29 +20,6 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="_daohang.blade.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/admin.eleb.com/resources/views/layout/_daohang.blade.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="234">
-              <caret line="144" column="39" selection-start-line="144" selection-start-column="39" selection-end-line="144" selection-end-column="39" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="StatisticsController.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/shop.eleb.com/app/Http/Controllers/StatisticsController.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="618">
-              <caret line="81" selection-start-line="81" selection-end-line="81" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ShopController.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/shop.eleb.com/app/Http/Controllers/ShopController.php">
-          <provider selected="true" editor-type-id="text-editor" />
-        </entry>
-      </file>
       <file leaf-file-name="ShopCategoryController.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/shop.eleb.com/app/Http/Controllers/ShopCategoryController.php">
           <provider selected="true" editor-type-id="text-editor" />
@@ -85,11 +62,30 @@
           <provider selected="true" editor-type-id="text-editor" />
         </entry>
       </file>
-      <file leaf-file-name="ActivityController.php" pinned="false" current-in-tab="true">
+      <file leaf-file-name="ActivityController.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/shop.eleb.com/app/Http/Controllers/ActivityController.php">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="390">
               <caret line="15" column="5" lean-forward="true" selection-start-line="15" selection-start-column="5" selection-end-line="15" selection-end-column="5" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="create.blade.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/admin.eleb.com/resources/views/nav/create.blade.php">
+          <provider selected="true" editor-type-id="text-editor" />
+        </entry>
+      </file>
+      <file leaf-file-name="index.blade.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/admin.eleb.com/resources/views/nav/index.blade.php">
+          <provider selected="true" editor-type-id="text-editor" />
+        </entry>
+      </file>
+      <file leaf-file-name="_daohang.blade.php" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/admin.eleb.com/resources/views/layout/_daohang.blade.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-6">
+              <caret line="148" lean-forward="true" selection-start-line="148" selection-end-line="148" />
             </state>
           </provider>
         </entry>
@@ -288,6 +284,28 @@
               <item name="eleg" type="b2602c69:ProjectViewProjectNode" />
               <item name="eleg" type="462c0819:PsiDirectoryNode" />
               <item name="admin.eleb.com" type="462c0819:PsiDirectoryNode" />
+              <item name="app" type="462c0819:PsiDirectoryNode" />
+              <item name="Http" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="eleg" type="b2602c69:ProjectViewProjectNode" />
+              <item name="eleg" type="462c0819:PsiDirectoryNode" />
+              <item name="admin.eleb.com" type="462c0819:PsiDirectoryNode" />
+              <item name="app" type="462c0819:PsiDirectoryNode" />
+              <item name="Http" type="462c0819:PsiDirectoryNode" />
+              <item name="Controllers" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="eleg" type="b2602c69:ProjectViewProjectNode" />
+              <item name="eleg" type="462c0819:PsiDirectoryNode" />
+              <item name="admin.eleb.com" type="462c0819:PsiDirectoryNode" />
+              <item name="app" type="462c0819:PsiDirectoryNode" />
+              <item name="Model" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="eleg" type="b2602c69:ProjectViewProjectNode" />
+              <item name="eleg" type="462c0819:PsiDirectoryNode" />
+              <item name="admin.eleb.com" type="462c0819:PsiDirectoryNode" />
               <item name="resources" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -296,6 +314,14 @@
               <item name="admin.eleb.com" type="462c0819:PsiDirectoryNode" />
               <item name="resources" type="462c0819:PsiDirectoryNode" />
               <item name="views" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="eleg" type="b2602c69:ProjectViewProjectNode" />
+              <item name="eleg" type="462c0819:PsiDirectoryNode" />
+              <item name="admin.eleb.com" type="462c0819:PsiDirectoryNode" />
+              <item name="resources" type="462c0819:PsiDirectoryNode" />
+              <item name="views" type="462c0819:PsiDirectoryNode" />
+              <item name="layout" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -406,12 +432,12 @@
       <workItem from="1552179199285" duration="2497000" />
       <workItem from="1552185242969" duration="6346000" />
       <workItem from="1552200686704" duration="968000" />
-      <workItem from="1552205301048" duration="5400000" />
+      <workItem from="1552205301048" duration="6101000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="263169000" />
+    <option name="totallyTimeSpent" value="263870000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -424,6 +450,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.4980695" visible="true" weight="0.27479893" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.32956153" />
@@ -484,11 +511,6 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/www.eleb.com/public/businessList.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-810" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/www.eleb.com/public/order.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-360" />
@@ -527,11 +549,6 @@
         <state relative-caret-position="360">
           <caret line="20" column="7" selection-start-line="20" selection-start-column="7" selection-end-line="20" selection-end-column="7" />
         </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/admin.eleb.com/resources/views/nav/create.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-270" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/admin.eleb.com/resources/views/nav/edit.blade.php">
@@ -749,13 +766,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/admin.eleb.com/resources/views/layout/_daohang.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="234">
-          <caret line="144" column="39" selection-start-line="144" selection-start-column="39" selection-end-line="144" selection-end-column="39" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/shop.eleb.com/app/Http/Controllers/StatisticsController.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="618">
@@ -800,6 +810,19 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="390">
           <caret line="15" column="5" lean-forward="true" selection-start-line="15" selection-start-column="5" selection-end-line="15" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/admin.eleb.com/resources/views/nav/create.blade.php">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/admin.eleb.com/resources/views/nav/index.blade.php">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/admin.eleb.com/resources/views/layout/_daohang.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-6">
+          <caret line="148" lean-forward="true" selection-start-line="148" selection-end-line="148" />
         </state>
       </provider>
     </entry>
